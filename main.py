@@ -2,34 +2,36 @@ import pyautogui
 import time
 
 
-def click_accept_button():
-    time.sleep(5)
-    primary_width, primary_height = pyautogui.size()
-    print(primary_height, primary_width)
-    accept_button_location = None
+def click_button(buttonImage, confidence=0.6, grayscale=True):
     print('looking for button.')
-    while accept_button_location is None:
-        time.sleep(5)
-        accept_button_location = pyautogui.locateOnScreen(
-            'image.png', confidence=0.6, grayscale=True
-        )
-        print(accept_button_location)
-        time.sleep(3)
-    
+    test = False
+    while not test:
+        try:
+            button_location = pyautogui.locateOnScreen(
+                buttonImage, confidence=confidence, grayscale=grayscale
+            )
+            test = True
+        except Exception as e:
+            pass
+        time.sleep(2)
     print("Button found !")
-    accpet_button_center = pyautogui.center(accept_button_location)
-    print(accpet_button_center)
-    x, y = accpet_button_center
-    print(x, y)
+    x, y = pyautogui.center(button_location)
     pyautogui.moveTo(x, y, 1)
     pyautogui.click()
+def enter_text(boxImage, text):
+    click_button(boxImage)
+    pyautogui.typewrite(text)
 
-    print("Match accepted ! Exiting...")
-    time.sleep(5)
-    exit()
-
-click_accept_button()
+#click_button("./imageParty.png")
+#enter_text("./imageSearch.png", "gwen")
+click_button("./imageAccept.png")
+enter_text("./imageAcceptSearch.png", "gwen")
+click_button("./imageGwen.png", grayscale=False)
+click_button("./imageLockIn.png", confidence=0.8)
 exit()
+primary_width, primary_height = pyautogui.size()
+pyautogui.hotkey('g', 'w', 'e', 'n', 'enter')
+print(primary_height, primary_width)
 time.sleep(10)
 pyautogui.hotkey("ctrl", "t")
 pyautogui.write("google.com")
