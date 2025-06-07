@@ -24,10 +24,12 @@ def enter_text(boxImage, text):
 
 #click_button("./imageParty.png")
 #enter_text("./imageSearch.png", "gwen")
-click_button("./imageAccept.png")
-enter_text("./imageAcceptSearch.png", "gwen")
-click_button("./imageGwen.png", grayscale=False)
-click_button("./imageLockIn.png", confidence=0.8)
+def accept_gwen():
+    click_button("./imageAccept.png")
+    enter_text("./imageAcceptSearch.png", "gwen")
+    click_button("./imageGwen.png", grayscale=False)
+    click_button("./imageLockIn.png", confidence=0.8)
+accept_gwen()
 exit()
 primary_width, primary_height = pyautogui.size()
 pyautogui.hotkey('g', 'w', 'e', 'n', 'enter')
