@@ -1,7 +1,7 @@
 import pyautogui
 import time
 
-
+# click button function
 def click_button(buttonImage, confidence=0.6, grayscale=True):
     print('looking for the button.')
     test = False
@@ -18,6 +18,7 @@ def click_button(buttonImage, confidence=0.6, grayscale=True):
     x, y = pyautogui.center(button_location)
     pyautogui.moveTo(x, y, 1)
     pyautogui.click()
+# type text to text box function
 def enter_text(boxImage, text):
     click_button(boxImage)
     pyautogui.typewrite(text)
@@ -26,6 +27,12 @@ def accept_gwen():
     click_button("./images/imageAccept.png")
     enter_text("./images/imageAcceptSearch.png", "gwen")
     click_button("./images/imageGwen.png", grayscale=False)
+    click_button("./images/imageLockIn.png", confidence=0.8)
+
+def accept_champ(name, img_path):
+    click_button("./images/imageAccept.png")
+    enter_text("./images/imageAcceptSearch.png", name)
+    click_button(img_path, grayscale=False)
     click_button("./images/imageLockIn.png", confidence=0.8)
 
 def accept():
